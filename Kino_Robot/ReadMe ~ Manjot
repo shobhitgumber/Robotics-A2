@@ -1,0 +1,7 @@
+// Add the following to the main code in order to import the kino robot to matlab
+
+Base_Kino = [0,0.22, pi]; // Base Location of the Kino 
+
+kino_1 = kino('kino', Base_Kino); // uses the kino class attached to label the kino as 'kino' and assigns it to base location in the workspace
+hold on;
+
