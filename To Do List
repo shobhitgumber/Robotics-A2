@@ -1,3 +1,3 @@
 Update environment based ontrobot make it look better add safety features based on changes.- done - add firex ext and estop on gui 
-Manjot - Robot class and Links - Not completed. Doesnt work links everywhere and class doesnot work - Shobhit will be completing 
-Manjot and me will do the code together and update the class (class and environment should be completely done by by 4th Oct. ). Remove extra files and rename them.
+Manjot - Robot class and Links - Not completed. Doesnt work links everywhere and class doesnot work - Shobhit will be completing - done 
+Manjot and me will do the code together and update the class (class and environment should be completely done by by 4th Oct. ). Remove extra files and rename them. (Monday)- use rosbag to use vision sensor 
