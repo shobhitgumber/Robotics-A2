@@ -2,7 +2,7 @@ classdef kino < handle
     properties
         %> Robot model
         model;
-        
+
         %>
         workspace = [-2 2 -2 2 -0.3 3];   
         
@@ -18,11 +18,11 @@ function self = kino(useGripper)
     self.useGripper = useGripper;
     
 %> Define the boundaries of the workspace
-
         
 % robot = 
 self.GetkinoRobot();
 % robot = 
+teach(self.model);
 self.PlotAndColourRobot();%robot,workspace);
 end
 
@@ -32,29 +32,31 @@ function GetkinoRobot(self)
 %     if nargin < 1
         % Create a unique name (ms timestamp after 1ms pause)
         pause(0.001);
-        name = ['Kinova_G3_',datestr(now,'yyyymmddTHHMMSSFFF')];
+        name = ['kino',datestr(now,'yyyymmddTHHMMSSFFF')];
 %     end
-            L1 = Link('a', 0,        'd', 0.2755,  'alpha', pi/2,  'qlim', deg2rad([-360 360]), 'offset', 0);
-            L2 = Link('a', 0.4100, 'd', 0,       'alpha', pi,     'qlim', deg2rad([-180 180]), 'offset', 0);
-            L3 = Link('a', 0, 'd', -0.0098,       'alpha', pi/2,     'qlim', deg2rad([-360 360]), 'offset', 0);
-            L4 = Link('a', 0,        'd', -0.2814, 'alpha', pi/2,  'qlim', deg2rad([-360 360]), 'offset', 0);
-            L5 = Link('a', 0,        'd', 0, 'alpha', pi/2, 'qlim', deg2rad([-360,360]), 'offset', 0);
-            L6 = Link('a', 0,        'd', -0.2341,  'alpha', pi,     'qlim', deg2rad([-360,360]), 'offset', 0);   
-            L7 = Link('a', 0,'d',0,'alpha',0,'qlim', deg2rad([-360,360]), 'offset', 0);
+            L1 = Link('d',0.2848,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]),'offset',0);
+            L2= Link('d',0.0054,'a',0.41,'alpha',-pi,'qlim',deg2rad([-90 90]),'offset',-pi/2);
+            L3 = Link('d',0.0064,'a',0,'alpha',-pi/2,'qlim',deg2rad([-170 170]),'offset',-pi/2);
+            L4 = Link('d',0.2084 + 0.1059,'a',0,'alpha',-pi/2,'qlim',deg2rad([-360 360]),'offset',0);
+            L5 = Link('d',0,'a',0,'alpha',pi/2,'qlim',deg2rad([-90 90]),'offset',0);
+            L6 = Link('d',0.1059 + 0.06153,'a',0,'alpha',0,'qlim',deg2rad([-360 360]),'offset',0);
 
             
 
-    self.model = SerialLink([L1 L2 L3 L4 L5 L6 L7],'name',name);
+    self.model = SerialLink([ L1 L2 L3 L4 L5 L6 ],'name',name);
+    self.model.base= transl(0,0,0)*self.model.base;
+
+
 end
 %% PlotAndColourRobot
 % Given a robot index, add the glyphs (vertices and faces) and
 % colour them in if data is available 
 function PlotAndColourRobot(self)%robot,workspace)
-    for linkIndex = 1:self.model.n
+    for linkIndex = 0:self.model.n
         if self.useGripper && linkIndex == self.model.n
             [ faceData, vertexData, plyData{linkIndex+1} ] = plyread(['Kino_Link',num2str(linkIndex),'Gripper.ply'],'tri'); %#ok<AGROW>
         else
-            [ faceData, vertexData, plyData{linkIndex+1} ] = plyread(['Kino_Link',num2str(linkIndex-1),'.ply'],'tri'); %#ok<AGROW>
+            [ faceData, vertexData, plyData{linkIndex+1} ] = plyread(['Kino_Link',num2str(linkIndex),'.ply'],'tri'); %#ok<AGROW>
         end
         self.model.faces{linkIndex+1} = faceData;
         self.model.points{linkIndex+1} = vertexData;
@@ -81,6 +83,7 @@ function PlotAndColourRobot(self)%robot,workspace)
             continue;
         end
     end
-end        
+end 
+
     end
 end
