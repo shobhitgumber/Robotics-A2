@@ -2,6 +2,8 @@
 % Lab 9 - Question 1 - Resolved Motion Rate Control in 6DOF
 function main()
 robot=kino;
+robot1base = [0.2, 1.5, 0.83]; %Base of the robot offset 
+robot.model.base = transl(robot1base) * trotz(-pi/2);
 % 1.1) Set parameters for the simulation
         % Load robot model
 t = 5;             % Total time (s)
