@@ -3,11 +3,11 @@
 function main()
 robot=kino;
 robot1base = [0.2, 1.5, 0.83]; %Base of the robot offset 
-robot.model.base = transl(robot1base) * trotz(-pi/2);
+robot.model.base = transl(robot1base);
 % 1.1) Set parameters for the simulation
         % Load robot model
 t = 5;             % Total time (s)
-deltaT = 0.01;      % Control frequency
+deltaT = 0.02;      % Control frequency
 steps = t/deltaT;   % No. of steps for simulation
 delta = 2*pi/steps; % Small angle change
 epsilon = 0.1;      % Threshold value for manipulability/Damped Least Squares
@@ -21,16 +21,18 @@ theta = zeros(3,steps);         % Array for roll-pitch-yaw angles
 x = zeros(3,steps);             % Array for x-y-z trajectory
 positionError = zeros(3,steps); % For plotting trajectory error
 angleError = zeros(3,steps);    % For plotting trajectory error
-EP=[ 0.965,1.4,0.95;
-    0,0.2,0.97;
-    0.965,1.4,0.95;
-    0.965,1.7,0.95;
-     0,0.2,0.97;
-     0.965,1.7,0.95;
-     0,0.2,0.97;
-    0,3.2,0.85];
+EP=[ 0.965,1.4,0.95; %go to sauce bottle 
+    0,0.5,0.98; %go to base 
+    0.965,1.4,0.95;% put sauce bottle back 
+    0.965,1.7,0.95;%go to second sauce bottle 
+     0,0.2,0.98; % go to base again 
+     0.965,1.7,0.95;% put sauce bottle back 
+     0,0.2,0.98;% go to base
+     0,0.5,1.6;
+     0,2,1.2;% drop on table
+    0,3.2,0.71];
 
-for G=1:8
+for G=1:10
     clear current;
     clear qMatrix;
  current= robot.model.fkine(robot.model.getpos());
@@ -49,7 +51,7 @@ for i=1:steps
 end
  
 T = [rpy2r(theta(1,1),theta(2,1),theta(3,1)) x(:,1);zeros(1,3) 1];          % Create transformation of first point and angle
-q0 = zeros(1,6);                                                            % Initial guess for joint angles
+q0 = [0 0 0 pi/2 0 0];                                                            % Initial guess for joint angles
 qMatrix(1,:) = robot.model.ikcon(T,q0);                                            % Solve joint angles to achieve first waypoint
 
 % 1.4) Track the trajectory with RMRC
@@ -87,8 +89,15 @@ end
 mat=size(qMatrix);
 for Animate=1:mat(1,1);
     robot.model.animate(qMatrix(Animate,:));
-   pause(0.1);
-end
-end 
+   pause(0.03);
 end
 
+end
+% if G==2 
+%     for i=1:steps
+%     q=robot.model.getpos();
+%     q1= [0,0.5,0.98];
+%     
+%     end 
+% end 
+end
