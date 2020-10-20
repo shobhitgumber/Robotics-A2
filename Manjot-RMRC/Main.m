@@ -1,8 +1,8 @@
 EnvironmentGen();
 
-
 Brick1Tr = transl(1, 1.4, 1)*troty(-pi);
 BrickTr = transl(1, 1.7, 1)*troty(-pi);
+Brick2Tr = transl(0, 0.5, 0.87);
 
 qkino = zeros(1, 6); 
 robot1base = [0.2, 1.5, 0.83]; %Base of the robot offset 
@@ -13,6 +13,7 @@ robot.model.animate(qkino) %Animate UR3
 
 Brick_1 = ImportPly('IngBottle.ply', Brick1Tr);
 Brick = ImportPly('IngBottle2.ply', BrickTr);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
 
 disp('PRESS ANY KEY TO ADD SAUCE 1 - PHASE 1...');
 pause;
@@ -79,6 +80,63 @@ UR6Movement = [T10];
 
 kino.Move(robot, UR6Movement, [] );
 robot.model.animate(qkino); %Animate UR3
+
+disp('PRESS ANY KEY TO COOK THE PIZZA - PHASE 5...');
+pause;
+
+%% PHASE 5 - COOKING PIZZA 
+
+Brick2Tr= transl(0.5, 0.5,0.88);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(1.0, 0.5,0.89);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(1.5, 0.5,0.90);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(2.0, 0.5,0.91);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(2.5, 0.5,0.92);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+
+disp('PRESS ANY KEY TO FINISH COOKING THE PIZZA - PHASE 6...');
+pause;
+
+%% PHASE 6 - PIZZA COOKED, EXIT OVEN 
+
+Brick2Tr= transl(2.5, 0.5,0.92);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(2.0, 0.5,0.91);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(1.5, 0.5,0.90);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(1.0, 0.5,0.89);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(0.5, 0.5,0.88);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+Brick2Tr = transl(0, 0.5,0.87);
+Brick_2 = ImportPly('PBase.ply', Brick2Tr);
+
+disp('PRESS ANY KEY FOR ROBOT TO PICK UP THE PIZZA - PHASE 7...');
+pause;
+
+%% PHASE 7 - PIZZA READY, PUT IT ON THE TABLE 
+
+T11 = transl(0, 0.5,0.87);
+T12 = transl(0, 0.5,0.87)*trotx(-3*pi/2);
+Movement7 = [T11,T12]
+kino.Move(robot, Movement7,[]);
+
+T13 = transl(-1, 1.5, 0.83);
+T14 = transl(-1, 1.5, 0.83)*trotx(-pi/2);
+Movement8 = [T13,T14]
+kino.Move(robot,Movement8,Brick_2);
+
+
+
+
+
+
+
+
 
 
  

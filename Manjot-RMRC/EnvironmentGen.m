@@ -216,28 +216,28 @@ end
 % Turn on a light (only turn on 1, don't keep turning them on), and make axis equal
 hold on;
 axis equal;
-%% Load Extra Bench
-[f, v, data] = plyread('PBase.ply', 'tri');
-
-% Scale the colours to be 0-to-1 (they are originally 0-to-255
-vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
-
-hold on;
-
-% Plot the cubes at the corners of a 10m square room
-for xOffset = [0]
-    for yOffset = [0.25]
-        for zOffset =[0.87]
-        % Then plot the trisurf with offset verticies
-        trisurf(f, v(:, 1)+xOffset, v(:, 2)+yOffset, v(:, 3) +zOffset ...
-            , 'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
-    end
-    end
-end 
-
-% Turn on a light (only turn on 1, don't keep turning them on), and make axis equal
-hold on;
-axis equal;
+% %% Load Extra Bench
+% [f, v, data] = plyread('PBase.ply', 'tri');
+% 
+% % Scale the colours to be 0-to-1 (they are originally 0-to-255
+% vertexColours = [data.vertex.red, data.vertex.green, data.vertex.blue] / 255;
+% 
+% hold on;
+% 
+% % Plot the cubes at the corners of a 10m square room
+% for xOffset = [0]
+%     for yOffset = [0.25]
+%         for zOffset =[0.87]
+%         % Then plot the trisurf with offset verticies
+%         trisurf(f, v(:, 1)+xOffset, v(:, 2)+yOffset, v(:, 3) +zOffset ...
+%             , 'FaceVertexCData', vertexColours, 'EdgeColor', 'interp', 'EdgeLighting', 'flat');
+%     end
+%     end
+% end 
+% 
+% % Turn on a light (only turn on 1, don't keep turning them on), and make axis equal
+% hold on;
+% axis equal;
 
 %% Load Fire Ext
 [f, v, data] = plyread('FireExt.ply', 'tri');
