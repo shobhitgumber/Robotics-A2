@@ -1,4 +1,4 @@
-%EnvironmentGen();
+EnvironmentGen();
 robot1base = [0.2, 1.5, 0.83];
 BBQTr = transl(robot1base(1)+0.8, robot1base(2) -0.1, 1)*troty(-pi);
 TomatoTr = transl(robot1base(1)+0.8, 1.7, 1)*troty(-pi);
@@ -100,39 +100,39 @@ switch n
         
 end
 
-
 %% PHASE 5 - COOKING PIZZA 
 
-
 disp('BASE SELECTED, COOKING PIZZA NOW')
-pizzaPanTr= transl(0.5, 0.5,0.88);
+camlight ;
+
+pizzaPanTr= transl(0.5, 0.5,0.90);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(1.0, 0.5,0.89);
+pizzaPanTr = transl(1.0, 0.5,0.93);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(1.5, 0.5,0.90);
+pizzaPanTr = transl(1.5, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(2.0, 0.5,0.91);
+pizzaPanTr = transl(2.0, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(2.5, 0.5,0.92);
+pizzaPanTr = transl(2.5, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
 
 disp('PRESS ANY KEY TO FINISH COOKING THE PIZZA - PHASE 6...');
 pause;
 
 %% PHASE 6 - PIZZA COOKED, EXIT OVEN 
-
+camlight;
 disp('PIZZA FINISHED COOKING')
-pizzaPanTr= transl(2.5, 0.5,0.92);
+pizzaPanTr= transl(2.5, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(2.0, 0.5,0.91);
+pizzaPanTr = transl(2.0, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(1.5, 0.5,0.90);
+pizzaPanTr = transl(1.5, 0.5,0.95);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(1.0, 0.5,0.89);
+pizzaPanTr = transl(1.0, 0.5,0.93);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(0.5, 0.5,0.88);
+pizzaPanTr = transl(0.5, 0.5,0.92);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
-pizzaPanTr = transl(0, 0.5,0.87);
+pizzaPanTr = transl(0, 0.5,0.90);
 pizzaPan = ImportPly('PBase.ply', pizzaPanTr);
 
 disp('PRESS ANY KEY FOR ROBOT TO PICK UP THE PIZZA - PHASE 7...');
@@ -147,9 +147,8 @@ Movement7 = [T11,T12]
 kino.Move(robot, Movement7,[]);
 
 
-T14 = transl(-1, 1.5, 1.4)*trotx(-pi/2);
-T15 = transl(-1, 1.5, 1.5)*trotx(-pi/2);
-Movement8 = [T14,T15]
+T14 = transl(-1, 1.5, 0.90)*trotx(-3*pi/2);
+Movement8 = [T14]
 kino.Move(robot,Movement8,pizzaPan);
 
 
