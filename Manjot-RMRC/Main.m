@@ -5,7 +5,7 @@ TomatoTr = transl(robot1base(1)+0.8, 1.7, 1)*troty(-pi);
 pizzaPanTr = transl(0, 0.5, 0.87);
 
 qkino = zeros(1, 6); 
-robot = kino('kino', robot1base); %Initializing Robot 1
+robot = kino; %Initializing Robot 1
 hold on;
 robot.model.base = transl(robot1base)*trotz(pi);
 robot.model.animate(qkino); 
