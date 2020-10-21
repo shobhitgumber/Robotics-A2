@@ -26,7 +26,8 @@ switch n
         %% PHASE 1 MOVING FIRST SAUCE BOTTLE To Pizza
         camlight;
 
-        Sauce1Movement1 = transl(BBQTr(1,4), BBQTr(2,4), 0.95)*trotx(-pi)*trotz(pi);
+        Sauce1Movement1 = transl(BBQTr(1,4), BBQTr(2,4), 0.95);
+        %*trotx(-pi)*trotz(pi);
         Sauce1Movement2 = BBQTr*trotx(pi)*trotz(-pi);
         Sauce1Movement = [Sauce1Movement1,Sauce1Movement2];
         kino.Move(robot, Sauce1Movement, [] );
@@ -43,13 +44,13 @@ switch n
 
         %% PHASE 2 - RESET 
  
-        T4= transl(0.5, 0.5,0.25);
-        T41= transl(1, 1.4,0.10);
+        T4= transl(0.5, 0.5,1.1);
+        T41= transl(1, 1.4,1)*trotx(pi/2);
 
         Sauce1Movement = [T2,T4,T41];
         kino.Move(robot, Sauce1Movement, BBQ_BOTTLE );
 
-        T5= transl(0.2, 1.4,0.95)
+        T5= transl(0.2, 0.4,0.95)
 
         RESETMovement = [T5];
 
@@ -64,7 +65,7 @@ switch n
        disp( "APPLYING SAUCE NOW");
 
         %% PHASE 3 - SAUCE BOTTLE 2 
-        Movement1 = transl(TomatoTr(1,4), 1.7, 0.95)*trotx(-pi)*trotz(pi);
+        Movement1 = transl(TomatoTr(1,4), TomatoTr(1,4), 0.95);
         Movement2Tr = TomatoTr*trotx(pi)*trotz(-pi);
         Movement = [Movement1,Movement2Tr];
         kino.Move(robot, Movement, [] );
@@ -80,15 +81,15 @@ switch n
         pause;
         %% PHASE 4 - RESET 
  
-        T4= transl(0.5, 0.5,0.25);
-        T41= transl(1, 1.4,0.10);
+        T4= transl(0.5, 0.5,1.1);
+        T41= transl(1, 1.7,1.0)*trotx(pi/2);
 
         Sauce2Movement = [T2,T4,T41];
         kino.Move(robot, Sauce2Movement, TOMATO_BOTTLE );
-
-        T5= transl(0.2, 1.4,0.95)
-
-        RESETMovement = [T5];
+        
+        T6 = transl(BBQTr(1,4), BBQTr(2,4), 0.95);
+        T5= transl(0.2, 0.4,0.95)
+        RESETMovement = [T6,T5];
 
         kino.Move(robot, RESETMovement, [] );
         
@@ -140,18 +141,15 @@ pause;
 %% PHASE 7 - PIZZA READY, PUT IT ON THE TABLE 
 
 disp('PICKING UP PIZZA')
-T11= transl(0,0.5,0.87)*trotx(-pi)*trotz(pi);
+T11= transl(0,0.5,0.87);
 T12 = transl(0,0.5,0.90)*trotx(-3*pi/2);
-%T11 = transl(0, 0.5,0.87)*trotx(-pi)*trotz(pi);
-%T12 = pizzaPanTr*trotx(pi)*trotz(-pi);
-%transl(0, 0.5,0.87)
-%*trotx(-3*pi/2);
 Movement7 = [T11,T12]
 kino.Move(robot, Movement7,[]);
 
-T13 = transl(-1, 1.5, 0.83);
-T14 = transl(-1, 1.5, 1.1)*trotx(-pi/2);
-Movement8 = [T13,T14]
+
+T14 = transl(-1, 1.5, 1.4)*trotx(-pi/2);
+T15 = transl(-1, 1.5, 1.5)*trotx(-pi/2);
+Movement8 = [T14,T15]
 kino.Move(robot,Movement8,pizzaPan);
 
 
